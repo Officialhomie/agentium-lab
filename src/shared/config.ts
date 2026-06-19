@@ -3,8 +3,12 @@ import type { Options, SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
 loadEnv();
 
+if (!process.env.ANTHROPIC_API_KEY) {
+  throw new Error("ANTHROPIC_API_KEY is not set — add it to your .env file");
+}
+
 export const baseOptions: Pick<Options, "model" | "maxTurns"> = {
-  model: "claude-sonnet-4-20250514",
+  model: "claude-sonnet-4-6",
   maxTurns: 10,
 };
 

@@ -11,7 +11,8 @@ export async function saveSession(sessionId: string): Promise<void> {
 export async function loadSession(): Promise<string | null> {
   try {
     return (await readFile(SESSION_FILE, "utf8")).trim();
-  } catch {
-    return null;
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === "ENOENT") return null;
+    throw err;
   }
 }
